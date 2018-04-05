@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -210,12 +210,12 @@ if has("cscope")
 
 endif
 
-
-nnoremap <silent> <F8> :TlistOpen<CR>
-let Tlist_Exit_OnlyWindow = 1
-"let tlist_c_settings = 'c;s:struct;f:function'
-let Tlist_Close_On_Select = 1
-let Tlist_Show_One_File = 1
+" Tagbar
+nnoremap <silent> <F8> :TagbarOpenAutoClose<CR>
+let g:tagbar_left = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+let g:tagbar_sort = 0
 
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
@@ -223,6 +223,19 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 " Show buffer index
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+" Enable/Disable whitespace error checks
+let g:airline#extensions#whitespace#enabled = 1
+" spaces are allowed after tabs, but not in between
+" this algorithm works well with programming styles that use tabs for
+" indentation and spaces for alignment
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+" configure which whitespace checks to enable. >
+" indent: mixed indent within a line
+" long:   overlong lines
+" trailing: trailing whitespace
+" mixed-indent-file: different indentation in different lines
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing']
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 " enable/disable displaying index of the buffer.
 " When enabled, numbers will be displayed in the tabline and mappings will be
 " exposed to allow you to select a buffer directly.  Up to 9 mappings will be
@@ -237,7 +250,8 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
+nmap <leader>= <Plug>AirlineSelectNextTab
+nmap <leader>b :CtrlPBuffer<CR>
 
 
 set splitright
@@ -248,4 +262,5 @@ set listchars=tab:>-,trail:~,extends:>,precedes:<
 "  character being highlighted in magenta when the line goes over the 80-character maximum.
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+set nocscopeverbose
 
