@@ -22,6 +22,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'schickling/vim-bufonly.git'
 Plugin 'tpope/vim-obsession.git'
+Plugin 'chrisbra/colorizer.git'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -34,6 +35,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -234,7 +236,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Show buffer index
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 " Enable/Disable whitespace error checks
-"let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 " spaces are allowed after tabs, but not in between
 " this algorithm works well with programming styles that use tabs for
 " indentation and spaces for alignment
